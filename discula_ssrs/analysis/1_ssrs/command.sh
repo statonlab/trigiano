@@ -1,3 +1,4 @@
+# script to findSSRs
 ln -s ../../archive/discula70_53.scafSeq 
 
 /lustre/projects/staton/software/makerP/exe/blast/bin/dustmasker \

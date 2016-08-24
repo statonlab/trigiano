@@ -41,6 +41,7 @@ def main():
     # output files
     AA     = open(output + ".aa.fasta", 'w')
     NTD    = open(output + ".ntd.fasta", 'w')
+    NTDg   = open(output + ".ntd.g.fasta", 'w')
     NONCAN = open(output + ".non_can.txt", 'w')
     ESTOP  = open(output + ".early_stop.txt", 'w')
     NOSTOP = open(output + ".no_stop.txt", 'w')
@@ -93,10 +94,18 @@ def main():
             # add exon to the entry
             elif rec[2] == "exon":
                 # this is our spliced nucletoide sequence for our exons
-                spliced_dict[name] = spliced_dict[name] + seq_dict[entry].seq[start:stop]
+                #spliced_dict[name] = spliced_dict[name] + seq_dict[entry].seq[start:stop]
                 # we need to keep track of exon boundaries for the output table, these get sorted
                 exons_dict[name].append(rec[3] + "\t" + rec[4])
     in_handle.close()
+
+    for name in exons_dict:
+        for i in sorted(exons_dict[name]):
+            l = i.split("	")
+            #print l[0],l[1]
+            start = int(l[0]) - 1
+            stop  = int(l[1])
+            spliced_dict[name] = spliced_dict[name] + seq_dict[entry].seq[start:stop]
 
     # handle printing first line of TBL
     outtbl = "Features\n"
@@ -156,6 +165,9 @@ def main():
             # print aa if negative, requires reverse_complement
             if orienta_dict[rec] == "-":
                 rev = spliced_dict[rec].reverse_complement()
+                ntdaheader = ">" + rec + ", nucleotide(-) len=" + str(len(rev))
+                print >> NTDg, ntdaheader
+                print >> NTDg, rev
                 aaseq = rev.translate()
                 aaheader = ">" + rec + ", amino acid(-) len=" + str(len(aaseq))
                 print >> AA, aaheader
@@ -211,6 +223,9 @@ def main():
             # print aa if positive
             elif orienta_dict[rec] == "+":
                 aaseq = spliced_dict[rec].translate()
+                ntdaheader = ">" + rec + ", nucleotide(+) len=" + str(len(spliced_dict[rec]))
+                print >> NTDg, ntdaheader
+                print >> NTDg, spliced_dict[rec]
                 aaheader = ">" + rec + ", amino acid(+) len=" + str(len(aaseq))
                 print >> AA, aaheader
                 print >> AA, aaseq

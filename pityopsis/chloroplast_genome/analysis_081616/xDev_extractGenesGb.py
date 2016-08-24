@@ -35,6 +35,7 @@ def main():
     tRNA   = open(output + ".tRNA.fasta", 'w')
     rRNA   = open(output + ".rRNA.fasta", 'w')
     CDS    = open(output + ".CDS2.fasta", 'w')
+    CDSnt  = open(output + ".CDSnt.fasta", 'w')
 
     # open genbank file
     gbank = SeqIO.parse(gb, 'genbank')
@@ -81,8 +82,10 @@ def main():
                     gi = gi.split("'")[0]
                     if gene.strand == 1:
                         print >> CDS, ">gi|%s|%s\n%s" % (gi,des,genome.seq[start:end].translate())
+                        print >> CDSnt, ">gi|%s|%s\n%s" % (gi,des,genome.seq[start:end])
                     elif gene.strand == -1:
-                         print >> CDS, ">gi|%s|%s\n%s" % (gi,des,genome.seq[start:end].reverse_complement().translate())
+                        print >> CDS, ">gi|%s|%s\n%s" % (gi,des,genome.seq[start:end].reverse_complement().translate())
+                        print >> CDS, ">gi|%s|%s\n%s" % (gi,des,genome.seq[start:end].reverse_complement())
 
 if __name__ == "__main__":
     main()

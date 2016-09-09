@@ -6,17 +6,3 @@
 !*md
 !*sh
 
-# ...even if they are in subdirectories
-!*/
-
-#but not these subdirs, we want to ignore them
-dogwood_powdery_mildew/
-pityopsis/chloroplast_genome/01_gapfilling/
-pityopsis/chloroplast_genome/02_gapfilling/
-pityopsis/chloroplast_genome/annotation_scripts_from_nate_v072106/
-pityopsis/chloroplast_genome/annotation_scripts_from_nate_v072606/
-pityopsis/droughtRNASeq/
-pityopsis/droughtRNASeq_alignToCP/
-pityopsis/rename.sh
-powdery_mildew/
-

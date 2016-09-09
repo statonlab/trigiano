@@ -6,7 +6,10 @@
 !*md
 !*sh
 
-#And some other stuff
+# ...even if they are in subdirectories
+!*/
+
+#but not these subdirs, we want to ignore them
 dogwood_powdery_mildew/
 pityopsis/chloroplast_genome/01_gapfilling/
 pityopsis/chloroplast_genome/02_gapfilling/
@@ -17,5 +20,3 @@ pityopsis/droughtRNASeq_alignToCP/
 pityopsis/rename.sh
 powdery_mildew/
 
-# ...even if they are in subdirectories
-!*/

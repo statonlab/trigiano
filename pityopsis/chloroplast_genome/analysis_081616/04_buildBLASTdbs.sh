@@ -1,6 +1,5 @@
 #!/bin/bash
-# create blast DBs
-# one for rRNAs and tRNAs
+# create blast DBs, one for rRNAs and tRNAs
 module load blast
 makeblastdb \
 -in Aster_NC_027434.r_t_RNA.fasta \
